@@ -1,0 +1,133 @@
+version: "2"
+linters:
+  default: none
+  enable:
+    - asciicheck
+    - bidichk
+    - copyloopvar
+    - cyclop
+    - depguard
+    - dogsled
+    - dupl
+    - errcheck
+    - errchkjson
+    - errname
+    - errorlint
+    - exhaustive
+    - exptostd
+    - funcorder
+    - funlen
+    - gocheckcompilerdirectives
+    - goconst
+    - gocritic
+    - godoclint
+    - godot
+    - govet
+    - iface
+    - inamedparam
+    - ineffassign
+    - interfacebloat
+    - intrange
+    - ireturn
+    - maintidx
+    - makezero
+    - mirror
+    - misspell
+    - modernize
+    - nakedret
+    - nestif
+    - nilerr
+    - nlreturn
+    - nolintlint
+    - nonamedreturns
+    - paralleltest
+    - perfsprint
+    - prealloc
+    - predeclared
+    - reassign
+    - recvcheck
+    - thelper
+    - tparallel
+    - unconvert
+    - unparam
+    - unused
+    - usestdlibvars
+    - usetesting
+    - varnamelen
+    - wastedassign
+    - whitespace
+    - wrapcheck
+  settings:
+    copyloopvar:
+      check-alias: true
+    cyclop:
+      max-complexity: 10
+      package-average: 0
+    depguard:
+      rules:
+        main:
+          files:
+            - $all
+          deny:
+            - pkg: reflect
+              desc: avoid reflect
+            - pkg: math/rand
+              desc: use crypto/rand
+            - pkg: math/rand/v2
+              desc: use crypto/rand
+    errcheck:
+      check-type-assertions: true
+      check-blank: true
+      exclude-functions:
+        - errors.AsType
+        - fmt.Print
+        - fmt.Printf
+        - fmt.Println
+        - fmt.Fprint
+        - fmt.Fprintf
+        - fmt.Fprintln
+        - strings.Builder.WriteString
+        - strings.Builder.WriteRune
+    exhaustive:
+      default-signifies-exhaustive: true
+    goconst:
+      min-len: 2
+      min-occurrences: 3
+    gocritic:
+      disabled-checks:
+        - hugeParam
+        - unnamedResult
+      enabled-tags:
+        - diagnostic
+        - experimental
+        - opinionated
+        - performance
+        - style
+    govet:
+      enable-all: true
+    nlreturn:
+      block-size: 2
+    nolintlint:
+      require-explanation: true
+      require-specific: true
+    varnamelen:
+      max-distance: 10
+      min-name-length: 3
+formatters:
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  uniq-by-line: false
+  fix: false
+run:
+  timeout: 2m
+  concurrency: 0
+  issues-exit-code: 1
+  tests: true
+  allow-parallel-runners: false
