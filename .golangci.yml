@@ -122,6 +122,8 @@ linters:
     varnamelen:
       max-distance: 10
       min-name-length: 2
+      ignore-decls:
+        - i int
 formatters:
   exclusions:
     generated: lax
